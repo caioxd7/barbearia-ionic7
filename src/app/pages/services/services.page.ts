@@ -1,0 +1,3 @@
+import {Component,inject} from '@angular/core';import {CommonModule} from '@angular/common';import {Router,RouterLink} from '@angular/router';import {IonContent,IonIcon} from '@ionic/angular/standalone';import {addIcons} from 'ionicons';import {cutOutline,timeOutline,chevronBack} from 'ionicons/icons';import {DataService} from '../../services/data.service';import {TabBarComponent} from '../../shared/tab-bar.component';
+addIcons({cutOutline,timeOutline,chevronBack});
+@Component({standalone:true,imports:[CommonModule,RouterLink,IonContent,IonIcon,TabBarComponent],templateUrl:'services.page.html'})export class ServicesPage{data=inject(DataService);private router=inject(Router);choose(id:string){sessionStorage.setItem('serviceId',id);this.router.navigateByUrl('/booking')}}

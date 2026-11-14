@@ -1,0 +1,3 @@
+import {Component,inject} from '@angular/core';import {CommonModule} from '@angular/common';import {Router} from '@angular/router';import {IonContent,IonIcon} from '@ionic/angular/standalone';import {addIcons} from 'ionicons';import {logOutOutline,mailOutline} from 'ionicons/icons';import {AuthService} from '../../services/auth.service';import {TabBarComponent} from '../../shared/tab-bar.component';
+addIcons({logOutOutline,mailOutline});
+@Component({standalone:true,imports:[CommonModule,IonContent,IonIcon,TabBarComponent],templateUrl:'profile.page.html'})export class ProfilePage{auth=inject(AuthService);router=inject(Router);get initial(){return (this.auth.user?.email||'C')[0].toUpperCase()}async logout(){await this.auth.logout();this.router.navigateByUrl('/login')}}

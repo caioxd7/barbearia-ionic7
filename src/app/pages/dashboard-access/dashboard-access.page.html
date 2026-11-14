@@ -1,0 +1,32 @@
+<ion-content>
+  <main class="access-page">
+    <p class="eyebrow">BARBEARIA / ACESSO ADMIN</p>
+    <h1>Dashboard bloqueado</h1>
+
+    <section class="access-message" *ngIf="reason === 'role-missing'">
+      <h2>Esta conta ainda não é administradora</h2>
+      <p>No Firebase Console, abra <b>Firestore Database → users</b>, localize o documento com o UID abaixo e adicione o campo <code>role</code> como string <code>admin</code>.</p>
+    </section>
+
+    <section class="access-message" *ngIf="reason === 'profile-missing'">
+      <h2>Perfil não encontrado no Firestore</h2>
+      <p>Crie um documento na coleção <code>users</code> usando o UID abaixo como ID. Depois, adicione <code>role</code> com o valor string <code>admin</code>.</p>
+    </section>
+
+    <section class="access-message" *ngIf="reason === 'permission-denied'">
+      <h2>O Firestore negou a leitura do perfil</h2>
+      <p>Publique as regras atualizadas do arquivo <code>firestore.rules</code> no Firebase Console e tente novamente.</p>
+    </section>
+
+    <section class="access-message" *ngIf="reason === 'error'">
+      <h2>Não foi possível verificar sua conta</h2>
+      <p>Confira a conexão com o Firebase e se o Firestore está criado no projeto configurado.</p>
+    </section>
+
+    <p class="uid-label">Conta conectada</p>
+    <code class="uid-value">{{ auth.user?.email || 'E-mail indisponível' }}</code>
+    <p class="uid-label">UID da conta</p>
+    <code class="uid-value">{{ auth.user?.uid || 'Usuário não autenticado' }}</code>
+    <ion-button expand="block" fill="outline" routerLink="/home">VOLTAR AO APP</ion-button>
+  </main>
+</ion-content>

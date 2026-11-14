@@ -1,0 +1,27 @@
+<ion-content>
+ <main class="app-shell" style="padding-top:48px">
+  <ng-container *ngIf="a?.serviceId; else noAppointment">
+   <div class="ok-mark"><ion-icon name="checkmark"></ion-icon></div>
+   <h1 class="page-title" style="text-align:center;margin-top:22px">Agendamento confirmado</h1>
+   <p class="page-sub" style="text-align:center">Tudo certo. Te esperamos na barbearia.</p>
+
+   <section class="card receipt">
+    <div class="r-row"><span>Serviço</span><b>{{a.serviceName}}</b></div>
+    <div class="r-row"><span>Barbeiro</span><b>{{a.barberName}}</b></div>
+    <div class="r-row"><span>Data</span><b>{{dateBr}}</b></div>
+    <div class="r-row"><span>Horário</span><b>{{a.time}}</b></div>
+    <div class="r-row"><span>Duração</span><b>{{a.duration}} min</b></div>
+    <div class="r-row total-row"><span>Total</span><b class="red">R$ {{a.price}},00</b></div>
+   </section>
+   <p class="muted" style="text-align:center;font-size:13px">Agendamento salvo no banco de dados.</p>
+
+   <a class="btn btn-red" routerLink="/home" style="margin-top:20px">Voltar ao início</a>
+   <a class="btn btn-ghost" routerLink="/history" style="margin-top:10px">Ver meus agendamentos</a>
+  </ng-container>
+  <ng-template #noAppointment>
+   <h1 class="page-title" style="text-align:center">Nenhum agendamento encontrado</h1>
+   <a class="btn btn-red" routerLink="/services" style="margin-top:24px">Escolher serviço</a>
+  </ng-template>
+ </main>
+ <app-tab-bar active="none"></app-tab-bar>
+</ion-content>

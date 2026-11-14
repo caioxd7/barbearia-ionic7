@@ -1,0 +1,22 @@
+<ion-content>
+ <main class="app-shell auth-shell">
+  <div class="brand">
+   <div class="brand-mark"><ion-icon name="cut"></ion-icon></div>
+   <span class="brand-name">Barbearia</span>
+  </div>
+
+  <h1 class="auth-title">Bem-vindo de volta</h1>
+  <p class="page-sub">Entre para ver sua agenda e marcar um novo horário.</p>
+
+  <form class="auth-form" #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+   <label class="field"><span>E-mail</span>
+    <div class="field-box"><input type="email" name="email" autocomplete="email" placeholder="voce@email.com" required email [(ngModel)]="email"></div></label>
+   <label class="field"><span>Senha</span>
+    <div class="field-box"><input type="password" name="password" autocomplete="current-password" placeholder="Sua senha" required [(ngModel)]="password"></div></label>
+   <p class="error-box" *ngIf="error" role="alert">{{error}}</p>
+   <button class="btn btn-red" type="submit" [disabled]="loading">{{loading?'Entrando...':'Entrar'}}</button>
+  </form>
+
+  <p class="auth-foot">Ainda não tem conta? <a href="javascript:void(0)" (click)="goToRegister()">Criar conta</a></p>
+ </main>
+</ion-content>

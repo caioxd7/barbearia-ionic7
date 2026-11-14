@@ -1,0 +1,53 @@
+:host {
+  display: block;
+}
+
+ion-content {
+  --background: #0b0b0c;
+}
+
+.access-page {
+  width: min(100% - 32px, 560px);
+  margin: 12vh auto 0;
+  padding: 28px;
+  border: 1px solid #29292d;
+  border-radius: 6px;
+  background: #141416;
+  color: #f4f4f5;
+}
+
+.eyebrow,
+.uid-label {
+  color: #e8b547;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+h1 {
+  margin: 10px 0 24px;
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 17px;
+}
+
+p {
+  color: #c9c9c9;
+  line-height: 1.6;
+}
+
+code {
+  overflow-wrap: anywhere;
+  color: #e8b547;
+}
+
+.uid-value {
+  display: block;
+  margin: 8px 0 24px;
+  padding: 12px;
+  border: 1px solid #29292d;
+  border-radius: 4px;
+  background: #0b0b0c;
+}

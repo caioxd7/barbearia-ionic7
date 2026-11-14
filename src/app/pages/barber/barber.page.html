@@ -1,0 +1,23 @@
+<ion-content>
+ <main class="app-shell">
+  <header class="top-bar"><a class="round-btn" routerLink="/home" aria-label="Voltar ao início"><ion-icon name="chevron-back"></ion-icon></a></header>
+
+  <section class="b-hero">
+   <span class="avatar" style="width:112px;height:112px;font-size:36px">{{initials}}</span>
+   <h1 class="page-title" style="margin-top:16px">{{b.name}}</h1>
+   <p class="page-sub">{{b.specialty}}</p>
+  </section>
+
+  <section class="stats card">
+   <div><b>380</b><small>Atendimentos</small></div>
+   <div><b class="red"><ion-icon name="star-sharp" style="font-size:15px;vertical-align:-1px"></ion-icon> {{b.rating}}</b><small>Nota</small></div>
+   <div><b>{{b.experience}}</b><small>Anos</small></div>
+  </section>
+
+  <div class="section-head"><h2>Sobre mim</h2></div>
+  <p class="muted" style="line-height:1.6;margin:0">Apaixonado por transformar estilos e elevar a autoestima. Cada detalhe faz a diferença.</p>
+
+  <button class="btn btn-red" type="button" (click)="book()" style="margin-top:28px">Agendar com {{b.name.split(' ')[0]}}</button>
+ </main>
+ <app-tab-bar active="none"></app-tab-bar>
+</ion-content>

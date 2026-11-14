@@ -1,0 +1,20 @@
+<ion-content>
+ <main class="app-shell">
+  <header class="top-bar"><h1 class="page-title">Meus agendamentos</h1></header>
+
+  <p class="error-box" *ngIf="error" role="alert">{{error}}</p>
+  <p class="muted" *ngIf="loading">Carregando agendamentos...</p>
+
+  <article class="card ap" *ngFor="let a of items">
+   <div class="ap-date" [class.past]="isPast(a)"><b>{{day(a)}}</b><small>{{month(a)}}</small></div>
+   <div class="ap-body"><strong>{{a.serviceName}}</strong><span>com {{a.barberName}} às {{a.time}}</span></div>
+   <div class="ap-side"><b>R$ {{a.price}},00</b><span class="chip" [ngClass]="isPast(a)?'chip-blue':'chip-red'">{{isPast(a)?'Concluído':'Marcado'}}</span></div>
+  </article>
+
+  <div class="empty card" *ngIf="!loading&&!error&&!items.length">
+   <ion-icon name="calendar-outline"></ion-icon><p>Você ainda não possui agendamentos.</p>
+   <a class="btn btn-red btn-small" routerLink="/services">Fazer o primeiro</a>
+  </div>
+ </main>
+ <app-tab-bar active="history"></app-tab-bar>
+</ion-content>

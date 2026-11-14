@@ -1,0 +1,58 @@
+<ion-content>
+  <main class="dashboard">
+    <header class="dashboard-header">
+      <div>
+        <p class="eyebrow">BARBEARIA / OPERAÇÃO</p>
+        <h1>Dashboard</h1>
+        <p class="subhead">Visão geral de agendamentos e desempenho.</p>
+      </div>
+      <div class="header-actions">
+        <span *ngIf="updatedAt" class="updated">Atualizado {{ updatedAt | date:'HH:mm' }}</span>
+        <ion-button fill="outline" size="small" [disabled]="loading" (click)="refresh()">
+          {{ loading ? 'ATUALIZANDO...' : 'ATUALIZAR' }}
+        </ion-button>
+      </div>
+    </header>
+
+    <ion-text color="danger" *ngIf="error"><p class="error-message">{{ error }}</p></ion-text>
+    <p class="loading-message" *ngIf="loading">Carregando dados do Firebase...</p>
+
+    <section class="metrics" aria-label="Indicadores principais">
+      <article class="metric">
+        <span class="metric-label">AGENDAMENTOS</span>
+        <strong>{{ appointments.length }}</strong>
+        <span class="metric-note">Registros no Firestore</span>
+      </article>
+      <article class="metric">
+        <span class="metric-label">RECEITA PREVISTA</span>
+        <strong>{{ revenue | currency:'BRL':'symbol':'1.0-2' }}</strong>
+        <span class="metric-note">Soma dos valores agendados</span>
+      </article>
+      <article class="metric">
+        <span class="metric-label">CLIENTES</span>
+        <strong>{{ customerCount }}</strong>
+        <span class="metric-note">Perfis cadastrados</span>
+      </article>
+      <article class="metric">
+        <span class="metric-label">TICKET MÉDIO</span>
+        <strong>{{ averageTicket | currency:'BRL':'symbol':'1.0-2' }}</strong>
+        <span class="metric-note">Receita por agendamento</span>
+      </article>
+    </section>
+
+    <section class="charts-grid" aria-label="Gráficos">
+      <article class="chart-panel trend-panel">
+        <div class="panel-heading"><h2>Agendamentos ao longo do tempo</h2><span>Últimos 6 meses</span></div>
+        <div class="chart-area"><canvas #trendCanvas></canvas></div>
+      </article>
+      <article class="chart-panel">
+        <div class="panel-heading"><h2>Serviços mais escolhidos</h2></div>
+        <div class="chart-area doughnut-area"><canvas #serviceCanvas></canvas></div>
+      </article>
+      <article class="chart-panel barber-panel">
+        <div class="panel-heading"><h2>Agendamentos por barbeiro</h2></div>
+        <div class="chart-area"><canvas #barberCanvas></canvas></div>
+      </article>
+    </section>
+  </main>
+</ion-content>

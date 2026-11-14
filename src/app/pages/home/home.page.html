@@ -1,0 +1,59 @@
+<ion-content>
+ <main class="app-shell">
+  <header class="top-bar">
+   <div><h1 class="page-title">Olá, {{name}}</h1><p class="page-sub">Pronto para ficar no estilo?</p></div>
+   <button class="round-btn" type="button" aria-label="Notificações"><ion-icon name="notifications-outline"></ion-icon></button>
+  </header>
+
+  <section class="week card">
+   <div class="week-head">
+    <span><ion-icon name="calendar-outline"></ion-icon> {{weekRange}}</span>
+    <span class="week-nav">
+     <button type="button" aria-label="Semana anterior" (click)="moveWeek(-1)"><ion-icon name="chevron-back"></ion-icon></button>
+     <button type="button" aria-label="Próxima semana" (click)="moveWeek(1)"><ion-icon name="chevron-forward"></ion-icon></button>
+    </span>
+   </div>
+   <div class="week-days">
+    <button type="button" *ngFor="let d of week" class="day" [class.sel]="d.iso===selected" [class.now]="d.iso===todayIso" (click)="selected=d.iso">
+     <small>{{d.label}}</small><b>{{d.num}}</b><i *ngIf="hasItems(d.iso)"></i>
+    </button>
+   </div>
+  </section>
+
+  <section class="summary">
+   <div class="sum-red"><span>{{isToday?'Hoje':'Dia selecionado'}}</span><b>{{dayItems.length}}</b><small>{{dayItems.length===1?'horário':'horários'}}</small><ion-icon name="cut-outline" class="sum-bg"></ion-icon></div>
+   <div class="sum-white"><span>Total do dia</span><b>R$ {{dayTotal}},00</b><small>dia {{selectedNum}}</small></div>
+  </section>
+
+  <div class="section-head"><h2>Seus horários</h2><a routerLink="/history">Ver todos</a></div>
+  <article class="slot card" *ngFor="let a of dayItems">
+   <div class="slot-time"><b>{{a.time}}</b><small>{{a.duration}} min</small></div>
+   <div class="slot-body"><strong>{{a.serviceName}}</strong><span>com {{a.barberName}}</span></div>
+   <span class="chip chip-white">R$ {{a.price}},00</span>
+  </article>
+  <div class="empty card" *ngIf="!dayItems.length">
+   <ion-icon name="time-outline"></ion-icon><p>Nenhum horário neste dia.</p>
+   <a class="btn btn-red btn-small" routerLink="/services">Agendar agora</a>
+  </div>
+
+  <div class="section-head"><h2>Serviços</h2><button type="button" (click)="openServices()">Ver todos</button></div>
+  <div class="h-scroll">
+   <button type="button" class="svc card" *ngFor="let s of data.services.slice(0,4)" (click)="chooseService(s.id)">
+    <span class="svc-icon"><ion-icon name="cut-outline"></ion-icon></span>
+    <strong>{{s.name}}</strong><small>{{s.duration}} min</small><b>R$ {{s.price}},00</b>
+   </button>
+  </div>
+
+  <div class="section-head"><h2>Nossos barbeiros</h2></div>
+  <div class="h-scroll">
+   <a class="bar card" *ngFor="let b of data.barbers" [routerLink]="['/barber',b.id]">
+    <span class="avatar" style="width:64px;height:64px;font-size:20px">{{initials(b.name)}}</span>
+    <strong>{{b.name}}</strong>
+    <span class="rate"><ion-icon name="star-sharp"></ion-icon>{{b.rating}}</span>
+   </a>
+  </div>
+
+  <a class="btn btn-red" routerLink="/services" style="margin-top:26px">Agendar agora</a>
+ </main>
+ <app-tab-bar active="home"></app-tab-bar>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-content>
+ <main class="app-shell">
+  <header class="top-bar">
+   <a class="round-btn" routerLink="/services" aria-label="Voltar"><ion-icon name="chevron-back"></ion-icon></a>
+   <h1 class="page-title" style="flex:1">Agendamento</h1>
+  </header>
+  <p class="page-sub" style="margin:-8px 0 18px">Passo 2 de 2. Escolha o barbeiro, o dia e o horário.</p>
+
+  <section class="card pick">
+   <span class="svc-icon"><ion-icon name="cut-outline"></ion-icon></span>
+   <span class="pick-body"><strong>{{service.name}}</strong><small>{{service.duration}} min</small></span>
+   <b>R$ {{service.price}},00</b>
+   <a class="link-small" routerLink="/services" style="padding:0;border:0">Trocar</a>
+  </section>
+
+  <div class="section-head"><h2>Com quem você quer cortar?</h2></div>
+  <div class="barber-picks">
+   <button type="button" class="bpick" *ngFor="let b of data.barbers" [class.sel]="b.id===barber.id" [attr.aria-pressed]="b.id===barber.id" (click)="selectBarber(b)">
+    <span class="avatar" style="width:52px;height:52px;font-size:17px">{{initials(b.name)}}</span>
+    {{b.name.split(' ')[0]}}
+    <small><ion-icon name="star-sharp" style="font-size:11px;vertical-align:-1px;color:var(--blue)"></ion-icon> {{b.rating}}</small>
+   </button>
+  </div>
+
+  <div class="section-head"><h2>Escolha o dia</h2><span class="muted" style="font-size:13px">{{monthLabel}}</span></div>
+  <div class="h-scroll dates">
+   <button type="button" class="date-pill" *ngFor="let d of days" [class.sel]="d.iso===date" (click)="selectDate(d.iso)"><small>{{d.label}}</small><b>{{d.num}}</b></button>
+  </div>
+
+  <div class="section-head"><h2>Escolha o horário</h2></div>
+  <div class="time-grid">
+   <button type="button" class="time-pill" *ngFor="let t of available" [class.sel]="time===t" (click)="selectTime(t)">{{t}}</button>
+  </div>
+  <p class="muted" *ngIf="!available.length" style="margin:0">Não há mais horários livres neste dia. Escolha outro dia.</p>
+
+  <p class="error-box" *ngIf="error" role="alert" style="margin-top:14px">{{error}}</p>
+
+  <div class="total card"><span>Total</span><b>R$ {{service.price}},00</b></div>
+  <button class="btn btn-red" type="button" style="margin-top:14px" [disabled]="saving||!time" (click)="confirm()">{{saving?'Salvando...':'Confirmar agendamento'}}</button>
+ </main>
+ <app-tab-bar active="none"></app-tab-bar>
+</ion-content>

@@ -1,0 +1,16 @@
+<ion-content>
+ <main class="app-shell">
+  <header class="top-bar">
+   <a class="round-btn" routerLink="/home" aria-label="Voltar ao início"><ion-icon name="chevron-back"></ion-icon></a>
+   <h1 class="page-title" style="flex:1">Escolha o serviço</h1>
+  </header>
+  <p class="page-sub" style="margin:-8px 0 18px">Passo 1 de 2. Na próxima tela você escolhe o barbeiro, o dia e o horário.</p>
+
+  <button type="button" class="svc-row card" *ngFor="let s of data.services" (click)="choose(s.id)">
+   <span class="svc-icon"><ion-icon name="cut-outline"></ion-icon></span>
+   <span class="svc-info"><strong>{{s.name}}</strong><small>{{s.description}}</small><em><ion-icon name="time-outline"></ion-icon>{{s.duration}} min</em></span>
+   <span class="svc-price">R$ {{s.price}},00</span>
+  </button>
+ </main>
+ <app-tab-bar active="services"></app-tab-bar>
+</ion-content>

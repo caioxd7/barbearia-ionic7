@@ -1,0 +1,12 @@
+<ion-content>
+ <main class="app-shell">
+  <header class="top-bar"><h1 class="page-title">Meu perfil</h1></header>
+  <section class="card prof">
+   <span class="avatar" style="width:84px;height:84px;font-size:30px">{{initial}}</span>
+   <h2>{{auth.user?.email}}</h2>
+   <p class="muted">Cliente da Barbearia</p>
+  </section>
+  <button class="btn btn-ghost" type="button" (click)="logout()" style="margin-top:22px;color:#ff6975;border-color:rgba(225,29,46,.5)"><ion-icon name="log-out-outline"></ion-icon> Sair da conta</button>
+ </main>
+ <app-tab-bar active="profile"></app-tab-bar>
+</ion-content>
